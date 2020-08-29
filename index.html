@@ -23,7 +23,95 @@
           } }
     </style>
     <!-- Custom styles for this template -->
-    <link href="styles/style.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/normalize.min.css" media="screen, print" />
+    <link rel="stylesheet" type="text/css" href="css/smartslider.min.css" media="screen, print" />
+    <link rel="stylesheet" type="text/css" href="css/litebox.min.css" media="screen, print" />
+      <script type="text/javascript">(function(){var N=this;N.N2_=N.N2_||{r:[],d:[]},N.N2R=N.N2R||function(){N.N2_.r.push(arguments)},N.N2D=N.N2D||function(){N.N2_.d.push(arguments)}}).call(window);if(!window.n2jQuery){window.n2jQuery={ready:function(cb){console.error('n2jQuery will be deprecated!');N2R(['$'],cb);}}}window.nextend={jQueryFallback:'https://estably.com/wp-includes/js/jquery/jquery.js',localization: {}, ready: function(cb){console.error('nextend.ready will be deprecated!');N2R('documentReady', function($){cb.call(window,$)})}};
+        nextend.fontsLoaded = false;
+        nextend.fontsLoadedActive = function () {nextend.fontsLoaded = true;};
+        var requiredFonts = ["Roboto:n3","Roboto:n4"],
+            fontData = {
+                google: {
+                    families: ["Roboto:300,400:latin"]
+                },
+                active: function(){nextend.fontsLoadedActive()},
+                inactive: function(){nextend.fontsLoadedActive()},
+                fontactive: function(f,s){fontData.resolveFont(f+':'+s);},
+                fontinactive: function(f,s){fontData.resolveFont(f+':'+s);},
+                resolveFont: function(n){
+                    for(var i = requiredFonts.length - 1; i >= 0; i--) {
+                        if(requiredFonts[i] === n) {
+                           requiredFonts.splice(i, 1);
+                           break;
+                        }
+                    }
+                    if(!requiredFonts.length) nextend.fontsLoadedActive();
+                }
+            };
+        if(typeof WebFontConfig !== 'undefined' && typeof WebFont === 'undefined'){
+            var _WebFontConfig = WebFontConfig;
+            for(var k in WebFontConfig){
+                if(k == 'active'){
+                  fontData.active = function(){nextend.fontsLoadedActive();_WebFontConfig.active();}
+                }else if(k == 'inactive'){
+                  fontData.inactive = function(){nextend.fontsLoadedActive();_WebFontConfig.inactive();}
+                }else if(k == 'fontactive'){
+                  fontData.fontactive = function(f,s){fontData.resolveFont(f+':'+s);_WebFontConfig.fontactive.apply(this,arguments);}
+                }else if(k == 'fontinactive'){
+                  fontData.fontinactive = function(f,s){fontData.resolveFont(f+':'+s);_WebFontConfig.fontinactive.apply(this,arguments);}
+                }else if(k == 'google'){
+                    if(typeof WebFontConfig.google.families !== 'undefined'){
+                        for(var i = 0; i < WebFontConfig.google.families.length; i++){
+                            fontData.google.families.push(WebFontConfig.google.families[i]);
+                        }
+                    }
+                }else{
+                    fontData[k] = WebFontConfig[k];
+                }
+            }
+        }
+        fontData.classes=true;
+        fontData.events=true;
+        
+        if(typeof WebFont === 'undefined'){
+            window.WebFontConfig = fontData;
+        }else{
+            WebFont.load(fontData);
+        }
+        </script>
+        <script type="text/javascript" src="js/n2-j.min.js"></script>
+        <script type="text/javascript" src="js/nextend-gsap.min.js"></script>
+        <script type="text/javascript" src="js/smartslider-frontend.min.js"></script>
+        <script type="text/javascript" src="js/smartslider-block-type-frontend.min.js"></script>
+        <script type="text/javascript" src="js/GsapMorphSVGPlugin.min.js"></script>
+        <script type="text/javascript" src="js/nextend-webfontloader.min.js"></script>
+        <script type="text/javascript" src="js/litebox.min.js"></script>
+       
+
+        <script type="text/javascript">N2R('documentReady', function($){
+        
+                nextend.fontsDeferred = $.Deferred();
+                if(nextend.fontsLoaded){
+                    nextend.fontsDeferred.resolve();
+                }else{
+                    nextend.fontsLoadedActive = function () {
+                        nextend.fontsLoaded = true;
+                        nextend.fontsDeferred.resolve();
+                    };
+                    var intercalCounter = 0;
+                    nextend.fontInterval = setInterval(function(){
+                        if(intercalCounter > 3 || document.documentElement.className.indexOf('wf-active') !== -1){
+                            nextend.fontsLoadedActive();
+                            clearInterval(nextend.fontInterval);
+                        }
+                        intercalCounter++;
+                    }, 1000);
+                }
+        window.n2ScrollSpeed=400;
+        N2R(["documentReady","smartslider-frontend","nextend-gsap","smartslider-block-type-frontend"],function(){new N2Classes.SmartSliderBlock('#n2-ss-74', {"admin":false,"callbacks":"","background.video.mobile":1,"alias":{"id":0,"smoothScroll":0,"slideSwitch":0,"scroll":1,"scrollSpeed":400},"align":"normal","isDelayed":0,"load":{"fade":1,"scroll":0},"playWhenVisible":1,"playWhenVisibleAt":0.5,"responsive":{"hideOn":{"desktopLandscape":false,"desktopPortrait":false,"tabletLandscape":false,"tabletPortrait":false,"mobileLandscape":false,"mobilePortrait":false},"onResizeEnabled":true,"type":"fullwidth","downscale":1,"upscale":1,"minimumHeight":0,"maximumSlideWidth":{"desktopLandscape":1200,"desktopPortrait":1200,"tabletLandscape":1200,"tabletPortrait":1200,"mobileLandscape":1200,"mobilePortrait":1200},"forceFull":1,"forceFullOverflowX":"body","forceFullHorizontalSelector":"","constrainRatio":1,"sliderHeightBasedOn":"real","decreaseSliderHeight":0,"focusUser":1,"focusEdge":"auto","breakpoints":[{"device":"tabletPortrait","type":"max-screen-width","portraitWidth":1199,"landscapeWidth":1199},{"device":"mobilePortrait","type":"max-screen-width","portraitWidth":700,"landscapeWidth":900}],"enabledDevices":{"desktopLandscape":0,"desktopPortrait":1,"tabletLandscape":0,"tabletPortrait":1,"mobileLandscape":0,"mobilePortrait":1},"sizes":{"desktopPortrait":{"width":1200,"height":700,"max":3000,"min":1200},"tabletPortrait":{"width":701,"height":408,"max":1199,"min":701},"mobilePortrait":{"width":320,"height":186,"max":900,"min":320}},"normalizedDeviceModes":{"unknown":"desktopPortrait","desktopPortrait":"desktopPortrait","desktopLandscape":"desktopPortrait","tabletLandscape":"desktopPortrait","tabletPortrait":"tabletPortrait","mobileLandscape":"tabletPortrait","mobilePortrait":"mobilePortrait"},"overflowHiddenPage":0,"focus":{"offsetTop":"#wpadminbar","offsetBottom":""}},"controls":{"mousewheel":0,"touch":0,"keyboard":0,"blockCarouselInteraction":1},"lazyLoad":0,"lazyLoadNeighbor":0,"blockrightclick":0,"maintainSession":0,"autoplay":{"enabled":0,"start":0,"duration":8000,"autoplayLoop":1,"allowReStart":0,"pause":{"click":1,"mouse":"enter","mediaStarted":1},"resume":{"click":0,"mouse":0,"mediaEnded":1,"slidechanged":0},"interval":1,"intervalModifier":"loop","intervalSlide":"current"},"perspective":1000,"layerMode":{"playOnce":0,"playFirstLayer":1,"mode":"skippable","inAnimation":"mainInEnd"},"parallax":{"enabled":1,"mobile":0,"is3D":0,"animate":1,"horizontal":"mouse","vertical":"mouse","origin":"slider","scrollmove":"both"},"postBackgroundAnimations":0,"initCallbacks":function($){new N2Classes.FrontendItemYouTube(this, "n2-ss-74item4", {"image":"https:\/\/i.ytimg.com\/vi\/4RuIHaIgvro\/hqdefault.jpg","aspect-ratio":"16:9","start":"0","volume":"1","autoplay":"0","ended":"","controls":"1","center":0,"loop":"0","reset":"0","related":"1","code":"qesNtYIBDfs","youtubeurl":"https:\/\/youtu.be\/4RuIHaIgvro","defaultimage":"hqdefault","modestbranding":"0","playbutton":"1","scroll-pause":"partly-visible","aspect-ratio-width":"16","aspect-ratio-height":"9","end":"0","playbuttonwidth":"48","playbuttonheight":"48","playbuttonimage":"","youtubecode":"4RuIHaIgvro","privacy-enhanced":0}, 1);this.stages.done("ResponsiveStart",function(){var e=this.sliderElement.find(".n2-ss-shape-divider");e.length&&e.each(function(e,t){var a=$(t),o={outer:a,inner:a.find(".n2-ss-shape-divider-inner")};this.sliderElement.on("SliderDeviceOrientation",function(e,t){for(var i=t.device.toLowerCase(),n=0;n<o.outer.length;n++){var s=o.outer.eq(n),a=o.inner.eq(n),d=s.data(i+"height"),r=a.data(i+"width");d<=0?s.css("display","none"):s.css("display",""),""===d&&(d=s.data("desktopportraitheight")),s.css("height",d+"px"),""===r&&(r=a.data("desktopportraitwidth")),a.css({width:r+"%",marginLeft:(r-100)/-2+"%"})}}),a.hasClass("n2-ss-divider-animate")&&this.visible(function(){var e=a.find(".n2-ss-divider-start > *"),t=a.find(".n2-ss-divider-end > *"),i=100/(a.data("speed")||100),n={};e.parent().attr("yoyo")&&(n={onComplete:function(){this.reverse()},onReverseComplete:function(){this.restart()}});for(var s=0;s<e.length;s++)NextendTween.to(e[s],parseFloat(e.eq(s).attr("duration"))*i,$.extend({morphSVG:t[s],delay:0,ease:"easeOutCubic"},n,{delay:e.eq(s).attr("delay"),ease:e.eq(s).attr("ease")}))});var d,i,n,s,r=a.data("scroll");"shrink"!==r&&"grow"!==r||(i=a.data("side"),s=function(e,t){var i,n=window.matchMedia&&/Android|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent||navigator.vendor||window.opera)?(i=n2const.isIOS?document.documentElement.clientHeight:window.innerHeight,window.matchMedia("(orientation: landscape)").matches?Math.min(screen.width,i):Math.min(screen.height,i)):window.n2ClientHeight||document.documentElement.clientHeight||document.body.clientHeight,s=this.sliderElement.offset().top+e,a=$(window).scrollTop();(s<=a+n&&a<=s||0<d&&d<100)&&(d=Math.max(0,Math.min(100,Math.abs(t-(s-a)/n*100))),o.inner.css("height",d+"%"))}.bind(this),"shrink"===r?(o.inner.css("height","100%"),d=100,n=function(){s("bottom"===i?this.sliderElement.height():0,0)}.bind(this)):"grow"===r&&(o.inner.css("height",0),d=0,n=function(){s("bottom"===i?this.sliderElement.height():0,100)}.bind(this)),$(window).on({scroll:n,resize:n}),this.visible(n))}.bind(this))}.bind(this));}});});
+        });
+        </script>
 <!-- Cookie Box-->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
 
@@ -42,7 +130,7 @@
       <!-- Image only NAVIGATION-->
       <nav class="navbar navbar-light bg-estably">
         <a class="navbar-brand" href="#">
-          <img src="images/Estably_digitalevermoegensverwaltung.png" width="250" height="auto" alt="Estably Digitale Vermögensverwaltung">
+          <img src="https://estably.com/wp-content/uploads/2020/07/Estably-Logo-png.png" width="250" height="auto" alt="Estably Digitale Vermögensverwaltung">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -88,128 +176,7 @@
     </div>
   </div>
 </nav>
-      </nav>
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner" role="listbox">
-          <!-- Slide One - Set the background image for this slide in the line below -->
-          <div class="carousel-item active" style="background-image: url('https://estably.com/wp-content/uploads/2020/08/Digitales_ValueInvesting.png')">
-            <div class="carousel-caption text-center">
-              <h1>Digitale Vermögensverwaltung aus Liechtenstein</h1>
-              <p>Wir investieren Ihr Geld in handverlesene Einzeltitel, während Sie digital alles im Blick behalten.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">zum Erklärvideo</a></p>
-            </div>
-          </div>
-          <!-- Slide Two - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('https://source.unsplash.com/bF2vsubyHcQ/1920x1080')">
-            <div class="carousel-caption text-left">
-              <h1>Online Depot Eröffnung</h1>
-              <p>Ihre Depoteröffnung erfolgt digital innerhalb von 20 Minuten - Sie benötigen keine Vorkenntnisse</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Kunde werden</a></p>
-            </div>
-          </div>
-          <!--cSlide Three - Set the background image for this slide in the line below -->
-          <div class="carousel-item" style="background-image: url('https://source.unsplash.com/szFUQoyvrxM/1920x1080')">
-            <div class="carousel-caption text-right">
-              <h1>Estably vs. klassische Robo-Advisor</h1>
-              <p>Unsere Idee ist es, die Vorzüge von bereits bestehenden Robo-Advisorn weiterzuentwickeln</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">zum Beitrag</a></p>
-            </div>
-          </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-      </div>
-<!-- <div class="estably-video">
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/4RuIHaIgvro" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-  </div> -->
-        <!-- Marketing messaging and featurettes
-        ================================================== -->
-        <!-- Wrap the rest of the page in another container to center all the content. -->
-      
-        <div class="container marketing">
-      
-          <!-- Three columns of text below the carousel -->
-          <div class="row">
-            <div class="col-lg-4">
-              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-              <h2>Heading</h2>
-              <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-              <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
-              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-              <h2>Heading</h2>
-              <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
-              <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
-              <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 140x140"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-              <h2>Heading</h2>
-              <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-              <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-            </div><!-- /.col-lg-4 -->
-          </div><!-- /.row -->
-      
-      
-          <!-- START THE FEATURETTES -->
-      
-          <hr class="featurette-divider">
-      
-          <div class="row featurette">
-            <div class="col-md-7">
-              <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It’ll blow your mind.</span></h2>
-              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-            </div>
-            <div class="col-md-5">
-              <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-            </div>
-          </div>
-      
-          <hr class="featurette-divider">
-      
-          <div class="row featurette">
-            <div class="col-md-7 order-md-2">
-              <h2 class="featurette-heading">Oh yeah, it’s that good. <span class="text-muted">See for yourself.</span></h2>
-              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-            </div>
-            <div class="col-md-5 order-md-1">
-              <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-            </div>
-          </div>
-      
-          <hr class="featurette-divider">
-      
-          <div class="row featurette">
-            <div class="col-md-7">
-              <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-            </div>
-            <div class="col-md-5">
-              <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
-            </div>
-          </div>
-      
-          <hr class="featurette-divider">
-      
-          <!-- /END THE FEATURETTES -->
-      
-        </div><!-- /.container -->
-      
-      
-        <!-- FOOTER --><h1>Hello, world!</h1>
-      <!-- div><img src="https://estably.com/wp-content/uploads/2020/07/mobileLanding-2.png" alt="Estably Ihre Digitale Vermögensverwaltung"></div>-->
-
+  
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -217,5 +184,27 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
 
-  </body>
+    <div class="n2-section-smartslider fitvidsignore  n2_clear" role="region" aria-label="Slider"><style>div#n2-ss-74{width:1200px;float:left;}html[dir="rtl"] div#n2-ss-74{float:right;}div#n2-ss-74 .n2-ss-slider-1{height:700px;box-sizing:border-box;position:relative;background-repeat:repeat;background-position:50% 50%;background-size:cover;background-attachment:scroll;}div#n2-ss-74.n2-ss-mobileLandscape .n2-ss-slider-1,div#n2-ss-74.n2-ss-mobilePortrait .n2-ss-slider-1{background-attachment:scroll;}div#n2-ss-74 .n2-ss-slider-background-video-container{position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden;}div#n2-ss-74 .n2-ss-slider-2{position:relative;width:100%;height:100%;overflow:hidden;z-index:10;}div#n2-ss-74 .n2-ss-slide-backgrounds,div#n2-ss-74 .n-particles-js-canvas-el{position:absolute;left:0;top:0;width:100%;height:100%;}div#n2-ss-74 .n2-ss-slide-backgrounds{z-index:10;}div#n2-ss-74 .n-particles-js-canvas-el{z-index:12;}div#n2-ss-74 .n2-ss-slide{position:absolute;top:0;left:0;width:1200px;height:700px;display:block;-webkit-backface-visibility:hidden;z-index:20;}div#n2-ss-74 .n2-ss-layers-container{position:relative;width:1200px;height:700px;}div#n2-ss-74 .n2-ss-slide{perspective:1000px;}div#n2-ss-74[data-ie] .n2-ss-slide{perspective:none;transform:perspective(1000px);}div#n2-ss-74 .n2-ss-button-container,div#n2-ss-74 .n2-ss-button-container a{display:inline-block;}div#n2-ss-74 .n2-ss-button-container.n2-ss-fullwidth,div#n2-ss-74 .n2-ss-button-container.n2-ss-fullwidth a{display:block;}div#n2-ss-74 .n2-ss-button-container.n2-ss-nowrap{white-space:nowrap;}div#n2-ss-74 .n2-ss-button-container a div{display:inline;font-size:inherit;text-decoration:inherit;color:inherit;line-height:inherit;font-family:inherit;font-weight:inherit;}div#n2-ss-74 .n2-ss-button-container a > div{display:inline-flex;align-items:center;vertical-align:top;}div#n2-ss-74 .n2-ss-button-container span{font-size:100%;vertical-align:baseline;}div#n2-ss-74 .n2-ss-button-container a[data-iconplacement="left"] span{margin-right:0.3em;}div#n2-ss-74 .n2-ss-button-container a[data-iconplacement="right"] span{margin-left:0.3em;}div#n2-ss-74 .n2-font-3adb14356dc8e200766db2e1b419448a-hover{font-family: 'Roboto';color: #ffffff;font-size:200%;text-shadow: none;line-height: 1.2;font-weight: normal;font-style: normal;text-decoration: none;text-align: inherit;letter-spacing: normal;word-spacing: normal;text-transform: none;font-weight: 400;}div#n2-ss-74 .n2-font-f10a844ec0099a6e00f77bef0dfb7c25-paragraph{font-family: 'Roboto';color: RGBA(255,255,255,0.99);font-size:125%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: inherit;letter-spacing: normal;word-spacing: normal;text-transform: none;font-weight: 500;}div#n2-ss-74 .n2-font-f10a844ec0099a6e00f77bef0dfb7c25-paragraph a, div#n2-ss-74 .n2-font-f10a844ec0099a6e00f77bef0dfb7c25-paragraph a:FOCUS{font-family: 'Roboto';color: #1890d7;font-size:100%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: inherit;letter-spacing: normal;word-spacing: normal;text-transform: none;font-weight: 500;}div#n2-ss-74 .n2-font-f10a844ec0099a6e00f77bef0dfb7c25-paragraph a:HOVER, div#n2-ss-74 .n2-font-f10a844ec0099a6e00f77bef0dfb7c25-paragraph a:ACTIVE{font-family: 'Roboto';color: #1890d7;font-size:100%;text-shadow: none;line-height: 1.5;font-weight: normal;font-style: normal;text-decoration: none;text-align: inherit;letter-spacing: normal;word-spacing: normal;text-transform: none;font-weight: 500;}div#n2-ss-74 .n2-style-f8293b450b12ef15d5c4ff97a617a3e3-heading{background: RGBA(255,255,255,0);opacity:1;padding:0px 0px 0px 0px ;box-shadow: none;border-width: 0px;border-style: solid;border-color: #000000; border-color: RGBA(0,0,0,1);border-radius:0px;}div#n2-ss-74 .n2-font-98a1d478134ba48710b4dc6276ad05f6-link a{font-family: 'Roboto';color: #ffffff;font-size:118.75%;text-shadow: 1px 1px 0px RGBA(0,0,0,0.17);line-height: normal;font-weight: normal;font-style: normal;text-decoration: none;text-align: center;letter-spacing: normal;word-spacing: normal;text-transform: none;font-weight: 400;}div#n2-ss-74 .n2-font-98a1d478134ba48710b4dc6276ad05f6-link a:HOVER, div#n2-ss-74 .n2-font-98a1d478134ba48710b4dc6276ad05f6-link a:ACTIVE, div#n2-ss-74 .n2-font-98a1d478134ba48710b4dc6276ad05f6-link a:FOCUS{color: #c3a069;font-weight: normal;text-align: left;line-height: normal;letter-spacing: normal;webkit-transition: all 0.3s ease-in-out;
+transition: all 0.3s ease-in-out;}div#n2-ss-74 .n2-style-8ec53690815b38b0058485dd7f8456cc-heading{background: #c3a069;opacity:1;padding:14px 25px 14px 25px ;box-shadow: 0px 0px 2px 1px RGBA(0,0,0,0.1);border-width: 0px;border-style: solid;border-color: #000000; border-color: RGBA(0,0,0,1);border-radius:5px;}div#n2-ss-74 .n2-style-8ec53690815b38b0058485dd7f8456cc-heading:Hover, div#n2-ss-74 .n2-style-8ec53690815b38b0058485dd7f8456cc-heading:ACTIVE, div#n2-ss-74 .n2-style-8ec53690815b38b0058485dd7f8456cc-heading:FOCUS{background: #ffffff;webkit-transition: all 0.3s ease-in-out;
+transition: all 0.3s ease-in-out;}</style><div id="n2-ss-74-align" class="n2-ss-align"><div class="n2-padding"><div id="n2-ss-74" data-creator="Smart Slider 3" class="n2-ss-slider n2-ow n2-has-hover n2notransition  n2-ss-load-fade " style="font-size: 1rem;" data-fontsize="16">
+        <div class="n2-ss-slider-1 n2-ow" style="">
+            <div class="n2-ss-slider-2 n2-ow">
+                                <div class="n2-ss-slide-backgrounds"></div><div data-first="1" data-slide-duration="0" data-id="501" style="" class=" n2-ss-slide n2-ss-canvas n2-ow  n2-ss-slide-501"><div class="n2-ss-slide-background n2-ow" data-mode="fill"><div data-hash="03b55cd6a94cba2850f551d3dab7b7c9" data-desktop="images/liechtenstein-vaduz1.jpg" class="n2-ss-slide-background-image" data-blur="0" data-alt="" data-title="" style="opacity:0.15"></div><div class="n2-ss-slide-background-color" style="background:linear-gradient(135deg, RGBA(33,51,61,1) 0%,RGBA(33,51,61,1) 100%);"></div></div><div class="n2-ss-layers-container n2-ow"><div class="n2-ss-layer n2-ow" style="padding:0px 0px 0px 0px;" data-desktopportraitpadding="0|*|0|*|0|*|0" data-sstype="slide" data-csstextalign="center" data-pm="default"><div class="n2-ss-layer n2-ow n-uc-1944be973811f" style="overflow:visible;" data-csstextalign="inherit" data-has-maxwidth="0" data-desktopportraitmaxwidth="0" data-cssselfalign="inherit" data-desktopportraitselfalign="inherit" data-pm="default" data-desktopportraitverticalalign="center" data-desktopportraitpadding="10|*|10|*|10|*|10|*|px+" data-desktopportraitinneralign="inherit" data-sstype="content" data-hasbackground="0" data-rotation="0" data-desktopportrait="1" data-desktoplandscape="1" data-tabletportrait="1" data-tabletlandscape="1" data-mobileportrait="1" data-mobilelandscape="1" data-adaptivefont="1" data-desktopportraitfontsize="100" data-plugin="rendered"><div class="n2-ss-section-main-content n2-ss-layer-content n2-ow n-uc-1944be973811f-inner" style="padding:0.625em 0.625em 0.625em 0.625em ;" data-verticalalign="center"><div class="n2-ss-layer n2-ow n-uc-13b67736f35f3" style="margin:0em 0em 0em 0em ;max-width: 1140px;overflow:visible;" data-frontend-fullwidth="1" data-pm="normal" data-desktopportraitmargin="0|*|0|*|0|*|0|*|px+" data-desktopportraitheight="0" data-has-maxwidth="1" data-desktopportraitmaxwidth="1140" data-cssselfalign="inherit" data-desktopportraitselfalign="inherit" data-csstextalign="inherit" data-desktopportraitpadding="10|*|10|*|10|*|10|*|px+" data-mobileportraitpadding="15|*|10|*|10|*|10|*|px+" data-desktopportraitgutter="20" data-desktopportraitwrapafter="0" data-mobileportraitwrapafter="1" data-mobilelandscapewrapafter="1" data-desktopportraitinneralign="inherit" data-sstype="row" data-rotation="0" data-desktopportrait="1" data-desktoplandscape="1" data-tabletportrait="1" data-tabletlandscape="1" data-mobileportrait="1" data-mobilelandscape="1" data-adaptivefont="0" data-desktopportraitfontsize="100" data-plugin="rendered"><div class="n2-ss-layer-row  n-uc-13b67736f35f3-inner" style="padding:0.625em 0.625em 0.625em 0.625em ;"><div class="n2-ss-layer-row-inner "><div class="n2-ss-layer n2-ow n-uc-110095e895de8" style="width: 43%;margin-right: 20px;margin-top: 20px;overflow:visible;" data-csstextalign="left" data-has-maxwidth="0" data-desktopportraitmaxwidth="0" data-pm="default" data-desktopportraitverticalalign="center" data-desktopportraitpadding="10|*|10|*|10|*|10|*|px+" data-desktopportraitinneralign="left" data-mobileportraitinneralign="center" data-desktopportraitorder="0" data-colwidthpercent="43" data-sstype="col" data-rotation="0" data-desktopportrait="1" data-desktoplandscape="1" data-tabletportrait="1" data-tabletlandscape="1" data-mobileportrait="1" data-mobilelandscape="1" data-adaptivefont="0" data-desktopportraitfontsize="100" data-plugin="rendered"><div class="n2-ss-layer-col n2-ss-layer-content n-uc-110095e895de8-inner" style="padding:0.625em 0.625em 0.625em 0.625em ;" data-verticalalign="flex-start"><div class="n2-ss-layer n2-ow" style="margin:0em 0em 0.3125em 0em ;overflow:visible;" data-pm="normal" data-desktopportraitmargin="0|*|0|*|5|*|0|*|px+" data-mobileportraitmargin="0|*|0|*|10|*|0|*|px+" data-desktopportraitheight="0" data-has-maxwidth="0" data-desktopportraitmaxwidth="0" data-cssselfalign="inherit" data-desktopportraitselfalign="inherit" data-sstype="layer" data-rotation="0" data-animv2="{&quot;specialZero&quot;:0,&quot;transformOrigin&quot;:&quot;50|*|50|*|0&quot;,&quot;basic&quot;:{&quot;in&quot;:{&quot;keyFrames&quot;:[{&quot;delay&quot;:0.2,&quot;opacity&quot;:0,&quot;x&quot;:&quot;100&quot;}]}}}" data-desktopportrait="1" data-desktoplandscape="1" data-tabletportrait="1" data-tabletlandscape="1" data-mobileportrait="1" data-mobilelandscape="1" data-adaptivefont="0" data-desktopportraitfontsize="100" data-tabletportraitfontsize="80" data-mobileportraitfontsize="80" data-plugin="rendered"><div id="n2-ss-74item1" class="n2-font-3adb14356dc8e200766db2e1b419448a-hover   n2-ss-item-content n2-ow" style="display:block;">Digitale Vermögensverwaltung aus Liechtenstein<br /></div></div><div class="n2-ss-layer n2-ow" style="margin:0.3125em 0em 0em 0em ;overflow:visible;" data-pm="normal" data-desktopportraitmargin="5|*|0|*|0|*|0|*|px+" data-desktopportraitheight="0" data-has-maxwidth="0" data-desktopportraitmaxwidth="0" data-cssselfalign="inherit" data-desktopportraitselfalign="inherit" data-sstype="layer" data-rotation="0" data-animv2="{&quot;specialZero&quot;:0,&quot;transformOrigin&quot;:&quot;50|*|50|*|0&quot;,&quot;basic&quot;:{&quot;in&quot;:{&quot;keyFrames&quot;:[{&quot;delay&quot;:0.4,&quot;opacity&quot;:0,&quot;x&quot;:&quot;100&quot;}]}}}" data-desktopportrait="1" data-desktoplandscape="1" data-tabletportrait="1" data-tabletlandscape="1" data-mobileportrait="1" data-mobilelandscape="1" data-adaptivefont="0" data-desktopportraitfontsize="100" data-mobileportraitfontsize="90" data-plugin="rendered"><div class="n2-ss-item-content n2-ow"><div class=" n2-ow n2-ow-all"><p class="n2-font-f10a844ec0099a6e00f77bef0dfb7c25-paragraph  n2-style-f8293b450b12ef15d5c4ff97a617a3e3-heading  n2-ow">Wir investieren Ihr Vermögen in handverlesene Einzeltitel, während Sie digital alles im Blick behalten.</p>
+</div></div></div><div class="n2-ss-layer n2-ow" style="margin:1.25em 0em 0em 0em ;overflow:visible;" data-pm="normal" data-desktopportraitmargin="20|*|0|*|0|*|0|*|px+" data-desktopportraitheight="0" data-has-maxwidth="0" data-desktopportraitmaxwidth="0" data-cssselfalign="inherit" data-desktopportraitselfalign="inherit" data-sstype="layer" data-rotation="0" data-animv2="{&quot;specialZero&quot;:0,&quot;transformOrigin&quot;:&quot;50|*|50|*|0&quot;,&quot;basic&quot;:{&quot;in&quot;:{&quot;keyFrames&quot;:[{&quot;delay&quot;:0.6,&quot;opacity&quot;:0,&quot;x&quot;:&quot;100&quot;}]}}}" data-desktopportrait="1" data-desktoplandscape="1" data-tabletportrait="1" data-tabletlandscape="1" data-mobileportrait="1" data-mobilelandscape="1" data-adaptivefont="0" data-desktopportraitfontsize="100" data-plugin="rendered"><div class="n2-ss-button-container n2-ss-item-content n2-ow n2-font-98a1d478134ba48710b4dc6276ad05f6-link  n2-ss-nowrap"><a class="n2-style-8ec53690815b38b0058485dd7f8456cc-heading  n2-ow  n2-lightbox-trigger nolightbox no-lightbox" data-n2-lightbox="" href="https://youtu.be/4RuIHaIgvro"><div><div>Whitepaper lesen</div></div></a></div></div></div></div><div class="n2-ss-layer n2-ow n-uc-19cf492316ccf" style="width: 57%;margin-right: 20px;margin-top: 20px;overflow:visible;" data-csstextalign="inherit" data-has-maxwidth="0" data-desktopportraitmaxwidth="0" data-pm="default" data-desktopportraitverticalalign="center" data-desktopportraitpadding="10|*|10|*|10|*|10|*|px+" data-desktopportraitinneralign="inherit" data-desktopportraitorder="0" data-colwidthpercent="57" data-sstype="col" data-rotation="0" data-desktopportrait="1" data-desktoplandscape="1" data-tabletportrait="1" data-tabletlandscape="1" data-mobileportrait="1" data-mobilelandscape="1" data-adaptivefont="0" data-desktopportraitfontsize="100" data-plugin="rendered"><div class="n2-ss-layer-col n2-ss-layer-content n-uc-19cf492316ccf-inner" style="padding:0.625em 0.625em 0.625em 0.625em ;" data-verticalalign="flex-start"><div class="n2-ss-layer n2-ow n2-ss-layer--need-width" style="margin:0em 0em 0em 0em ;overflow:visible;" data-pm="normal" data-desktopportraitmargin="0|*|0|*|0|*|0|*|px+" data-desktopportraitheight="auto" data-has-maxwidth="0" data-desktopportraitmaxwidth="0" data-cssselfalign="inherit" data-desktopportraitselfalign="inherit" data-sstype="layer" data-rotation="0" data-animv2="{&quot;basic&quot;:{&quot;in&quot;:{&quot;type&quot;:&quot;basic&quot;,&quot;name&quot;:&quot;Links&quot;,&quot;keyFrames&quot;:[{&quot;delay&quot;:0.6,&quot;opacity&quot;:0,&quot;x&quot;:400,&quot;mobilePortrait&quot;:{&quot;x&quot;:&quot;-200&quot;}}]}}}" data-desktopportrait="1" data-desktoplandscape="1" data-tabletportrait="1" data-tabletlandscape="1" data-mobileportrait="1" data-mobilelandscape="1" data-adaptivefont="0" data-desktopportraitfontsize="100" data-plugin="rendered"><div id="n2-ss-74item4" class="n2_ss_video_player n2-ss-item-content n2-ow-all" data-aspect-ratio="16:9"><div class="n2_ss_video_player__placeholder" ></div><div id="n2-ss-74item4-frame"></div><div class="n2_ss_video_player__cover" style="cursor:pointer; background: URL(https://i.ytimg.com/vi/4RuIHaIgvro/hqdefault.jpg) no-repeat 50% 50%; background-size: cover"><img style="width:48px;height:48px;margin-left:-24px;margin-top:-24px;" class="" data-no-lazy="1" data-hack="data-lazy-src" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+CiAgICA8Y2lyY2xlIGN4PSIyNCIgY3k9IjI0IiByPSIyNCIgZmlsbD0iIzAwMCIgb3BhY2l0eT0iLjYiLz4KICAgIDxwYXRoIGZpbGw9IiNGRkYiCiAgICAgICAgICBkPSJNMTkuOCAzMmMtLjEyNCAwLS4yNDctLjAyOC0uMzYtLjA4LS4yNjQtLjExNi0uNDM2LS4zNzUtLjQ0LS42NjRWMTYuNzQ0Yy4wMDUtLjI5LjE3Ni0uNTUuNDQtLjY2Ni4yNzMtLjEyNi41OTItLjEuODQuMDdsMTAuNCA3LjI1N2MuMi4xMzIuMzIuMzU1LjMyLjU5NXMtLjEyLjQ2My0uMzIuNTk1bC0xMC40IDcuMjU2Yy0uMTQuMS0uMzEuMTUtLjQ4LjE1eiIvPgo8L3N2Zz4=" alt="Play" /></div></div></div></div></div></div></div></div></div></div></div></div></div>                <div class="n2-ss-shape-divider n2-ss-shape-divider-bottom n2-ss-divider-animate" style="height:180px;" data-desktopportraitheight="180" data-desktoplandscapeheight="100" data-tabletportraitheight="50" data-tabletlandscapeheight="50" data-mobileportraitheight="25" data-mobilelandscapeheight="25" data-scroll="shrink" data-speed="100" data-side="bottom"><div class="n2-ss-shape-divider-inner" style="width:100%;margin-left:0%;" data-desktopportraitwidth="100" data-desktoplandscapewidth="100" data-tabletportraitwidth="100" data-tabletlandscapewidth="100" data-mobileportraitwidth="100" data-mobilelandscapewidth="100"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 110" preserveAspectRatio="none">
+    <g class="n2-ss-divider-start">
+        <path fill="RGBA(255,255,255,0.5)" duration="1" delay="0.2"
+              d="M1920,110L1920,100L960,100C920,100,0,100,0,100L0,112L1920,112z"></path>
+        <path fill="RGBA(255,255,255,1)" duration="1" d="M1920,110L1920,100L960,100L0,100L0,112L1920,112z"></path>
+    </g>
+    <g class="n2-ss-divider-end">
+        <path fill="RGBA(255,255,255,0.5)" d="M1920,110L1920,0C1920,0,1000,70,960,70C920,70,0,0,0,0L0,112L1920,112z"></path>
+        <path fill="RGBA(255,255,255,1)" d="M1920,110L1920,30C1920,30,1000,100,960,100C920,100,0,30,0,30L0,112L1920,112z"></path>
+    </g>
+</svg>
+</div></div>            </div>
+                    </div>
+        </div></div></div><div class="n2_clear"></div><div id="n2-ss-74-placeholder" style="min-height:0px;position: relative;z-index:2;background-color:RGBA(0,0,0,0); background-color:RGBA(255,255,255,0);"><img style="width: 100%; max-width:1200px; display: block;opacity:0;margin:0px;" class="n2-ow" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjcwMCIgPjwvc3ZnPg==" alt="Slider" /></div></div></body>
+</html>
+    
+</body>
 </html>
