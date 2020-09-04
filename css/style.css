@@ -17,6 +17,32 @@ body {
   text-align: right;
   font-size: 18px;
 }
+.navbar-light .navbar-toggler {
+  color: #21333d;
+  border-color: white;
+}
+.btn-outline-success {
+  font-size: 18px;
+  color: #c3a069;
+  border-color: #21333d;
+  background-color: #21333d;
+}
+.navbar-light .navbar-nav .nav-link {
+  color: #C3A069;
+}
+.navbar-nav .nav-link {
+  padding-right: 0;
+  padding-left: 0;
+  text-align: right;
+  font-size: 22px;
+  padding: 7px 14px 3px 5px;
+}
+.btn-outline-success:hover {
+  color: #fff;
+  background-color: #c3a069;
+  border-color: #c3a069;
+}
+
 /* CUSTOMIZE THE CAROUSEL
 -------------------------------------------------- */
 
